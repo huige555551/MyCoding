@@ -54,17 +54,23 @@ Node* reverse(Node* cur, Node * prev=NULL)
 
 Node* mergeSortedList(Node* head1, Node* head2)
 {
+	Node* h;
+
 	if(head1==NULL) return head2;
 	if(head2==NULL) return head1;
 
-	if(head1->data <= head2->data){		
-		head1->next = mergeSortedList(head1->next, head2);
-		return head1;
+	if(head1->data <= head2->data)
+	{	
+		h = head1;
+		h->next = mergeSortedList(head1->next, head2);
 	}
-	else{		
-		head2->next = mergeSortedList(head1, head2->next);
-		return head2;
+	else
+	{
+		h = head2;
+		h->next = mergeSortedList(head1, head2->next);
 	}	
+
+	return h;
 }
 
 Node* mergeSortedList2(Node* head1, Node* head2)
@@ -112,13 +118,21 @@ void removeDuplicate(Node* root)
 	while(root)
 	{
 		int data = root->data;
-		if(hashTable.find(data) == hashTable.end()){
+		// if not found yet
+		if(hashTable.find(data) == hashTable.end())
+		{
+			//mark the data as found
 			hashTable[data] = true;
+			//mark the last position of unique list
 			prev = root;			
-		}else{
+		}
+		// if found already
+		else
+		{
+			//then skip it
 			prev->next = root->next;
 		}
-
+		//iterate each node
 		root = root->next;		
 	}
 }

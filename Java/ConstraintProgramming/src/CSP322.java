@@ -122,7 +122,7 @@ public class CSP322 {
     public static void testSudoku(String problem)
     {
     	int N = 81;
-		int K = 10; // domain value of 0 will be given -2 
+		int K = 10; // domain value of 0 will be given -2 for ignoring 
 		
 		Constraint[][] C = new Constraint[N][N];
 		int[][] domains = new int[N][K];

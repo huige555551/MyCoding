@@ -43,7 +43,8 @@ void printCombination2(int arr[], int n, int r, int index=0, vector<int>& v = em
     }     
 
 	//it's like 8 queen without any checking
-	for(int i=index; i<n; i++){
+	for(int i=index; i<n; i++)
+	{
 		v.push_back(arr[i]);
 		while(arr[i]==arr[i+1]) i++; //extra line for removing duplicates
 		printCombination2(arr, n, r, i+1, v);
