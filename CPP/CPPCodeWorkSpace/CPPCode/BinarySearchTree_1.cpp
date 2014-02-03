@@ -136,6 +136,7 @@ void deleteNode(struct node ** root, int num)
 
 			x->data = xsucc->data;
 			x=xsucc;
+			// this x will be deleted by following code
 		}
 
 		//no child

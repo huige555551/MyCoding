@@ -45,8 +45,10 @@ int coin_change_dynamic(int n){
 
 void main()
 {	
-	for(int n=0; n<=100; n++){ cout << n << ": ";
-		cout <<  makeChange(250, 25) << " ";
+	for(int n=0; n<=100; n++)
+	{ 
+		cout << n << ": ";
 		cout << coin_change_dynamic(n) << endl;	
 	}
+	cout <<  makeChange(250, 25) << " ";
 }

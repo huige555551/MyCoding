@@ -3,7 +3,6 @@
 #include <vector>
 using namespace std;
 
-
 void KMPSearch(const string& txt, const string& pat, const vector<int>& LPS)
 {
 	int i = 0;
@@ -108,3 +107,7 @@ int main()
 
 	return 0;
 }
+
+
+//http://computing.dcu.ie/~humphrys/Notes/String/kmp.html
+//http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/

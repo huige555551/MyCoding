@@ -20,7 +20,6 @@ void parentheses(int x, int y, int n){
 		parentheses(x,y+1,n);
 		v.pop_back();
 	}
-
 }
 
 //using arrays

@@ -48,16 +48,23 @@ class DogFactory {
 public class Factory1 {
 
     public static void main(String[] args) {
+    	
+    	Dog[] d = new Dog[2];
+    	
         // create a small dog
-        Dog dog = DogFactory.getDog("small");
-        dog.speak();
+        d[0] = DogFactory.getDog("small");
+        d[0].speak();
 
         // create a big dog
-        dog = DogFactory.getDog("big");
-        dog.speak();
+        d[1] = DogFactory.getDog("big");
+        d[1].speak();
 
         // create a working dog
-        dog = DogFactory.getDog("working");
+        Dog dog = DogFactory.getDog("working");
+        dog.speak();
+        
+     // create a big dog
+        dog = DogFactory.getDog("big");
         dog.speak();
     }
 }

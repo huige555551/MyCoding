@@ -13,7 +13,8 @@ int sum2(int a, int b)
 	if(b==0) return a;
 	if(a==0) return b;
 
-	while(a!=0 && b!=0){
+	while(a!=0 && b!=0)
+	{
 		int c = (a^b);
 		int d = (a&b)<<1;
 		a=c;

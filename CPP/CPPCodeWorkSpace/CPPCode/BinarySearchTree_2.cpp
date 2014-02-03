@@ -8,6 +8,8 @@ public:
 	int data;
 	Node* left;
 	Node* right;
+
+	Node(int val): data(val), left(NULL), right(NULL){}
 };
 
 int input[] = {4,2,3,6,5,7};
@@ -21,9 +23,7 @@ void createBSTreadingPreOrder(int min_val, int max_val, Node*& node)
 	if(val<min_val || val > max_val) 
 		return;
 
-	node = new Node();
-	node->data = val;
-	node->left = node->right = NULL;
+	node = new Node(val);
 	
 	index++;
 

@@ -12,8 +12,8 @@ map<int, int> rnum;
 //[m,n)
 int rand_num(int m, int n){ 
 	//return m+rand()%(n-m); //uses only lower bits
-	return m + rand() / ((RAND_MAX/(n-m)) + 1);	//it uses a range for a particular random number //uses upper bits
-	//return (rand()/(RAND_MAX+1.0)) * (n-m) + m;
+	//return m + rand() / ((RAND_MAX/(n-m)) + 1);	//it uses a range for a particular random number //uses upper bits
+	return (rand()/(RAND_MAX+1.0)) * (n-m) + m;
 }
 
 void card_shuffle()
