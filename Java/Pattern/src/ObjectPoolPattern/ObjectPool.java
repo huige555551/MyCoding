@@ -6,8 +6,8 @@ import java.util.Hashtable;
 public abstract class ObjectPool<T> {
 
 	private long expirationTime;
-	private Hashtable<T, Long> locked;
-	private Hashtable<T, Long> unlocked;
+	private Hashtable<T, Long> locked;	//OBJECTS THAT ARE IN USE
+	private Hashtable<T, Long> unlocked;//OBJECTS THAT ARE NOT IN USE BUT CREATED
 	
 	public ObjectPool() {
 	    expirationTime = 30000; // 30 seconds
@@ -18,7 +18,18 @@ public abstract class ObjectPool<T> {
 	public abstract T create();
 	public abstract boolean validate(T o);
 	public abstract void expire(T o);
-	 
+	
+	//GET AN OBJECT FROM POOL OR CREATE A NEW ONE
+	//Iterate through all unlocked objects
+	//	if object_time_is_expired:
+	//		EXPIRE(object)
+	//	else:
+	//		if VALIDATE(object):
+	//			remove it from unlocked_hash
+	//			put object in locked_hash
+	//			return
+	//		else
+	//			EXPIRE(object)
 	public synchronized T checkOut() 
 	{
 		long now = System.currentTimeMillis();
@@ -60,6 +71,7 @@ public abstract class ObjectPool<T> {
 		return (t);
 	}
 	
+	//return the object into the pool
 	public synchronized void checkIn(T t) 
 	{
 		locked.remove(t);

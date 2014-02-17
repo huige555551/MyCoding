@@ -16,8 +16,10 @@ int LeastMissingNum(int arr[], int first, int last)
 
 	int mid = (last + first)/2;
 
+	// caution: consider min in both cases
+	// (first to mid) OR (mid to last)
 	if(mid - first < arr[mid] - arr[first])
-		LeastMissingNum(arr, first, mid);
+		LeastMissingNum(arr, first, mid);	
 	else
 		LeastMissingNum(arr, mid, last);
 }

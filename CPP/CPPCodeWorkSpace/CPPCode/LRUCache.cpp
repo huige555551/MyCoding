@@ -18,7 +18,7 @@ template <class K, class T>
 class Cache{
 public:
 	unordered_map<K, CacheNode<K, T>*> hashMap;
-	CacheNode<K, T>* head, *tail;
+	CacheNode<K, T>* head, *tail;	// head or tail could be initialize to defaul value, it will be simpler
 	static const int maxSize = 4;
 	
 	T getReference(K key)
@@ -39,8 +39,9 @@ public:
 	CacheNode<K, T>* putInQueue(K key)
 	{
 		//if cache is full 
-		if(hashMap.size() >= maxSize){
-			//erase the LRU key from hash
+		if(hashMap.size() >= maxSize)
+		{
+			//erase the last LRU key from hash
 			hashMap.erase(tail->key);
 
 			//delete the tail node
