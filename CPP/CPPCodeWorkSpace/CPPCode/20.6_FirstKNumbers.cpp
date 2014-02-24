@@ -18,8 +18,10 @@ int partition(int arr[], int n, int k, int start, int end)
 	int pivot = arr[end];
 
 	int j = -1;
-	for(int i=0; i<=end-1; i++){
-		if(arr[i] <= pivot){
+	for(int i=0; i<=end-1; i++)
+	{
+		if(arr[i] <= pivot)
+		{
 			j = j+1;
 			swap(arr, i, j);
 		}

@@ -16,23 +16,26 @@ void KMPSearch(const string& txt, const string& pat, const vector<int>& LPS)
 			j++;
 		}
 
-		if(j == pat.size()){
+		if(j == pat.size())
+		{
 			cout << "Pattern found at position: " << i - j + 1 << endl;
 			j = LPS[j-1];
 		}
 		else if ( txt[i] != pat[j])
 		{
-			if(j > 0){
+			if(j > 0)
+			{
 				j = LPS[j-1];
 			}
-			else{
+			else
+			{
 				i++;
 			}
 		}
 	}
 }
 
-//computer Longest Prefix of the pattern 
+//compute Longest Prefix of the pattern 
 //which is equal to the Suffix of pattern
 vector<int> generateLPS(string pat)
 {

@@ -17,15 +17,18 @@ int binarySearch(int x)
 
 		if(x==A[m]) return m;
 
-		else if(A[m] >= A[l] && A[m] <= A[u]){
+		else if(A[m] >= A[l] && A[m] <= A[u])
+		{
 			if(x < A[m]) u = m-1;
 			else l = m+1;
 		}
-		else if(A[m] >= A[u]){
+		else if(A[m] >= A[u])
+		{
 			if(x >= A[l] && x < A[m]) u = m-1;
 			else l = m+1;
 		}
-		else if(A[m] <= A[l]){
+		else if(A[m] <= A[l])
+		{
 			if(x >= A[l]) u = m-1;
 			else l = m+1;
 		}
