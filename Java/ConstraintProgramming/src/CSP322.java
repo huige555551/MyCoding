@@ -53,7 +53,9 @@ public class CSP322 {
 		//the constraint graph is a circle with N nodes
 		Constraint[][] C = new Constraint[N][N];
 		Constraint c = new Constraint();
-		for(int i = 0; i < N - 1; i++){
+		
+		for(int i = 0; i < N - 1; i++)
+		{
 		     C[i][i+1] = c;
 		     C[i + 1][i] = c;
  
@@ -65,11 +67,10 @@ public class CSP322 {
 		
 		for(int i = 0; i < N; i++){
 		   for(int j = 0; j < K; j++){
-		      domains[i][j] = -1;
+		      domains[i][j] = CSPInstance.IS_VALID;
 		   }
-		}
-		
-		domains[N-1][1] = -2; // delete 0 from the domain of x_0 for testing purposes 
+		}		
+		domains[N-1][1] = CSPInstance.NOT_VALID; // delete 0 from the domain of x_0 for testing purposes 
 		
 		CSPInstance csp = new CSPInstance(C, domains); 
 		
@@ -126,6 +127,7 @@ public class CSP322 {
 		
 		Constraint[][] C = new Constraint[N][N];
 		int[][] domains = new int[N][K];
+		
 		Constraint con = new Constraint();
 		
 		for(int i=0; i<N; i++)
@@ -134,7 +136,7 @@ public class CSP322 {
 			
 			for(int k=1; k<K; k++)
 			{
-				domains[i][k]=-1;
+				domains[i][k] = CSPInstance.IS_VALID;
 			}
 		}
 		

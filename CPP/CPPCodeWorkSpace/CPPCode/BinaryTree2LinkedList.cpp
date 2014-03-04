@@ -12,6 +12,7 @@ public:
 	Node(int val): data(val), left(NULL), right(NULL){}
 };
 
+//inorder traversal
 void BST2LinkedList(Node* root, Node*& head)
 {
 	static Node* last = NULL;
@@ -20,15 +21,19 @@ void BST2LinkedList(Node* root, Node*& head)
 
 	BST2LinkedList(root->left, head);
 	
+	//the first node discovered in inorder 
+	//traversal is the head of the linked list
 	if(head == NULL)
 	{
 		head = root;
 	}
 	else
 	{
+		//
 		last->right = root;
 		root->left = last;
 	}	
+	//mark the current node as last
 	last = root;
 
 	BST2LinkedList(root->right, head);

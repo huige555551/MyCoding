@@ -26,32 +26,32 @@ public class ConstraintPropagator {
 	 * @param currentValue: the value currently assigned to the current variable x_currentLevel
 	 * @return false if the domain of some variable becomes empty after the forward checking
 	 */	
-	   //You are required to implement this function to do the forward-checking
-	   //If a domain value k of a variable x_j is not compatible with the assignment
-	   //x_current = value, delete k by letting domains[j][k] = current  
-	   //
-	   //Return false only if some variable's domain become empty  	
+   //You are required to implement this function to do the forward-checking
+   //If a domain value k of a variable x_j is not compatible with the assignment
+   //x_current = value, delete k by letting domains[j][k] = current  
+   //
+   //Return false only if some variable's domain become empty  	
 	public static boolean forwardChecking(CSPInstance csp, int currentLevel, int currentValue)
 	{				
 		//for all the other variables
-		for(int i=currentLevel+1; i<csp.N; i++)
+		for(int i=currentLevel+1; i<csp.numOfVariables; i++)
 		{
 			//if there is any constraint with currentLevel
-			if(csp.C[currentLevel][i]!=null)
+			if(csp.constraints[currentLevel][i]!=null)
 			{
 				boolean success = false;
 				
 				//iterate through the domain of the variable
-				for(int d=0; d<csp.K; d++)
+				for(int d=0; d<csp.numOfDomains; d++)
 				{					
 					//if domain value is not changed yet
-					if(csp.domains[i][d] == -1)
+					if(csp.domains[i][d] == CSPInstance.IS_VALID)
 					{		
 						//check whether the value is compatible with currentValue
-						if(!csp.C[currentLevel][i].isCompatible(currentValue, d))
+						if(!csp.constraints[currentLevel][i].isCompatible(currentValue, d))
 						{
 							//if not compatible then change it
-							csp.domains[i][d]=currentLevel;	
+							csp.domains[i][d] = currentLevel;	
 						}
 						else {// compatible then success
 							success = true;
@@ -76,20 +76,25 @@ public class ConstraintPropagator {
 	   //Delete value j of variable i by assigning domains[i][j] = currentLvel
 	   //Return false when some variable's domain become empty 
 	
-	public static boolean arcConsistency(CSPInstance csp, int currentLevel){
-		
+	public static boolean arcConsistency(CSPInstance csp, int currentLevel)
+	{	
+		// queue for all storing all arcs
 		Queue<IntPair> q = new LinkedList<IntPair>();		
+		// add all arcs to queue
 		addAllArcs(csp, q);		
 		
-		while(!q.isEmpty()){
-			
+		// while queue is not empty
+		while(!q.isEmpty())
+		{
+			// pull one arc
 			IntPair pair = q.poll();
 			int x = pair.x;
 			int y = pair.y;
 			
+			// revise the domain of X with respect of Y
 			if(arcRevise(csp, x, y, currentLevel))
-			{
-				
+			{	
+				// size of valid domain in DomX
 				if(sizeOfDomain(csp, x) == 0) 
 					return false;
 				
@@ -109,11 +114,11 @@ public class ConstraintPropagator {
 	 */
 	public static void addAllXArcs(CSPInstance csp, Queue<IntPair> q, int x, int y)
 	{
-		for(int i=0; i<csp.N; i++)
+		for(int i=0; i<csp.numOfVariables; i++)
 		{
 			if(i==x || i==y) continue;
 			
-			if(csp.C[x][i]!=null)
+			if(csp.constraints[x][i]!=null)
 			{
 				IntPair pair = new IntPair(i, x);
 				q.add(pair);
@@ -121,56 +126,66 @@ public class ConstraintPropagator {
 		}
 	}
 	
-	public static int sizeOfDomain(CSPInstance csp, int x){
-		
+	public static int sizeOfDomain(CSPInstance csp, int x)
+	{		
 		int count = 0;
 		
-		for(int i=0; i<csp.K; i++){
-			if(csp.domains[x][i]==-2) continue;
+		for(int i=0; i<csp.numOfDomains; i++)
+		{
+			if(csp.domains[x][i]== CSPInstance.NOT_VALID) continue;
 			count++;
 		}
 		
 		return count;		
 	}
 	
-	public static boolean arcRevise(CSPInstance csp, int x, int y, int currentLevel){
-		boolean changed = false;
+	public static boolean arcRevise(CSPInstance csp, int x, int y, int currentLevel)
+	{
+		boolean xDomainChanged = false;
 		
-		for(int i=0; i<csp.K; i++)
-		{
-			
-			if(csp.domains[x][i]==-2) continue;
+		// foreach domain values of x
+		for(int i=0; i<csp.numOfDomains; i++)
+		{			
+			if(csp.domains[x][i] == CSPInstance.NOT_VALID) 
+				continue;
 			
 			boolean compatible = false;
 			
-			for(int j=0; j<csp.K; j++)
+			// foreach domain values of y
+			for(int j=0; j<csp.numOfDomains; j++)
 			{				
-				if (csp.domains[y][j] == -2) continue;
+				if (csp.domains[y][j] == CSPInstance.NOT_VALID) 
+					continue;
 				
-				if(csp.C[x][y].isCompatible(i, j))
+				// check compatibility
+				// whether i \in DomX is comatible with any of j \in DomY
+				if(csp.constraints[x][y].isCompatible(i, j))
 				{
 					compatible = true;
 					break;
 				}
 			}
 			
-			if(!compatible){
+			// if i \in DomX is not compatible
+			// then DomX needs to be reviesed 
+			if(!compatible)
+			{
 				csp.domains[x][i] = currentLevel;
-				changed = true;
+				xDomainChanged = true;
 			}
 			
 		}
 		
-		return changed;
+		return xDomainChanged;
 	}
 	
 	public static void addAllArcs(CSPInstance csp, Queue<IntPair> q)
 	{
-		for(int i=0; i<csp.N; i++)
+		for(int i=0; i<csp.numOfVariables; i++)
 		{
-			for(int j=0; j<csp.N; j++)
+			for(int j=0; j<csp.numOfVariables; j++)
 			{
-				if(csp.C[i][j]!=null && i!=j)
+				if(csp.constraints[i][j]!=null && i!=j)
 				{
 					IntPair pair = new IntPair(i,j);
 					q.add(pair);					

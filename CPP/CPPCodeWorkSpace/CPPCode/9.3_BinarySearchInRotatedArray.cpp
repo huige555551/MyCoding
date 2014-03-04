@@ -2,35 +2,35 @@
 #include <iostream>
 using namespace std;
 
-//int A[] = {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14};
-int A[] = { 7, 10, 14, 15, 16, 19, 20, 25, 1, 3, 4, 5};
-
-int binarySearch(int x)
+int binarySearch(int x, int A[], int size)
 {
 	int l = 0;
-	int u = sizeof(A)/sizeof(A[0]) - 1;
+	int u = size - 1;
 	int m;
 
 	while(l<=u)
 	{
 		m = (l+u)/2;
 
-		if(x==A[m]) return m;
+		if(x == A[m]) 
+			return m;
 
-		else if(A[m] >= A[l] && A[m] <= A[u])
+		// if first half is in sorted order
+		if(A[l] <= A[m])
 		{
-			if(x < A[m]) u = m-1;
-			else l = m+1;
+			if(x >= A[l] && x <= A[m])
+				u = m-1;
+			else
+				l = m+1;
+
 		}
-		else if(A[m] >= A[u])
+		// else 2nd half is in sorted order
+		else //if(A[m] <= A[u])
 		{
-			if(x >= A[l] && x < A[m]) u = m-1;
-			else l = m+1;
-		}
-		else if(A[m] <= A[l])
-		{
-			if(x >= A[l]) u = m-1;
-			else l = m+1;
+			if(x >= A[m] && x <= A[u])
+				l = m+1;
+			else
+				u = m-1;
 		}
 	}
 
@@ -39,6 +39,10 @@ int binarySearch(int x)
 
 void main()
 {
-	for(int i=0; i<sizeof(A)/sizeof(A[0]); i++)
-		cout << A[i] << "->" << binarySearch(A[i]) << endl;
+	//int A[] = {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14};
+	int A[] = { 7, 10, 14, 15, 16, 19, 20, 25, 1, 3, 4, 5};
+	int size = sizeof(A)/sizeof(A[0]);
+
+	for(int i=0; i < size; i++)
+		cout << A[i] << "->" << binarySearch(A[i], A, size) << endl;
 }

@@ -9,8 +9,8 @@
 
 public class Constraint{
 		
-	     public boolean isCompatible(int first, int second){
-		   return (first != second);
-	     }   
+	 public boolean isCompatible(int first, int second){
+		 return (first != second);
+	 }   
 	 
 } 
