@@ -26,7 +26,8 @@ int partition(Point* myList, int n, int k, int start, int end)
     double pivot = getDist(myList[end]);
     
     int j = -1;
-    for(int i = 0; i <= end-1; i++)
+    //for(int i = 0; i <= end-1; i++)
+	for(int i = start; i <= end-1; i++)
     {
         if(getDist(myList[i]) <= pivot)
         {

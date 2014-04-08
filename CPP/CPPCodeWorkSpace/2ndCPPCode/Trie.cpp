@@ -8,7 +8,7 @@ class Node{
 public:
 	char value;
 	unordered_map<char, Node*> children;
-	vector<int> index;
+	vector<int> index; //index of the string in the dictionary
 
 	Node(char ch): value(ch){}
 
@@ -29,10 +29,13 @@ public:
 		child->insert(str.substr(1), i);
 	}
 
-	vector<int> findIndex(string str){
-		if(str.empty()) return index;
+	vector<int> findIndex(string str)
+	{
+		if(str.empty()) 
+			return index;
 
-		if(children.find(str[0])!=children.end()){
+		if(children.find(str[0])!=children.end())
+		{
 			return children[str[0]]->findIndex(str.substr(1));
 		}
 		

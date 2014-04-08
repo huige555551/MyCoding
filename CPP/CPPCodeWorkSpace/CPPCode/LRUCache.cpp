@@ -51,11 +51,15 @@ public:
 		}
 
 		CacheNode<K, T>* newNode = new CacheNode<K, T>(key);
-
-		if(hashMap.size()==0){
+		
+		//if cache size is zero
+		if(hashMap.size()==0)
+		{
 			tail = newNode;	
 		}
-		else{
+		else
+		{
+			//put the new node at the front
 			newNode->next = head;
 			head->prev = newNode;
 		}

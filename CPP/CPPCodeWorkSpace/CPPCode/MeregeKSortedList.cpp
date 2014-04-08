@@ -45,6 +45,8 @@ public:
 
 vector<int> mergeKArrays(int arr[][N], int k)
 {
+	//priority queue is by default MAX_HEAP with MIN(<) comarison
+	//MIN_HEAP needs to have sort cass different (>)
 	priority_queue<Node, vector<Node>, Comparison> queue ( Comparison(true) );
 	vector<int> result;
 

@@ -5,7 +5,7 @@ using namespace std;
 class Node{
 public:
 	int data;
-	vector<Node*> next;
+	vector<Node*> next;	//next pointer for each level
 
 	Node(): data(0), next(0){}
 	Node(int d, int level): data(d), next(level, NULL) {}

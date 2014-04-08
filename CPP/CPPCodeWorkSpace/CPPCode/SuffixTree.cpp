@@ -9,7 +9,7 @@ class SuffixTreeNode
 {
 	char value;
 	unordered_map<char, SuffixTreeNode*> children;
-	vector<int> indexes;
+	vector<int> indexes; //start index of the suffix 
 
 public:
 	void insertString(string s, int index)

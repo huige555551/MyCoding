@@ -50,7 +50,7 @@ public class ConstraintPropagator {
 						//check whether the value is compatible with currentValue
 						if(!csp.constraints[currentLevel][i].isCompatible(currentValue, d))
 						{
-							//if not compatible then change it
+							//if not compatible then mark it
 							csp.domains[i][d] = currentLevel;	
 						}
 						else {// compatible then success

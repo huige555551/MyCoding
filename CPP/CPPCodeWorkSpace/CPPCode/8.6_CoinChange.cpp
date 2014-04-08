@@ -32,13 +32,13 @@ int coin_change_dynamic(int n){
 	for(i=0; i<=n; i++) t[i]=1;
 
 	//using coin 5
-	for(i=5; i<=n; i+=1) t[i] += t[i-5];
+	for(i=5; i<=n; i++) t[i] += t[i-5];
 
 	//using coin 10
-	for(i=10; i<=n; i+=1) t[i] += t[i-10];
+	for(i=10; i<=n; i++) t[i] += t[i-10];
 
 	//using coin 25
-	for(i=25; i<=n; i+=1) t[i] += t[i-25];
+	for(i=25; i<=n; i++) t[i] += t[i-25];
 
 	return t[n];
 }

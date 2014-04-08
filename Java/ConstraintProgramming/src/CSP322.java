@@ -146,8 +146,8 @@ public class CSP322 {
 		
 		CSPInstance csp = new CSPInstance(C, domains);
 		CSPSolver solver = new CSPSolver();
-		solver.solve(csp, ConstraintPropagator.CONSISTENCY_LEVEL_FORWARD_CHECKING);
-		//solver.solve(csp, ConstraintPropagator.CONSISTENCY_LEVEL_ARC_CONSISTENCY);
+		//solver.solve(csp, ConstraintPropagator.CONSISTENCY_LEVEL_FORWARD_CHECKING);
+		solver.solve(csp, ConstraintPropagator.CONSISTENCY_LEVEL_ARC_CONSISTENCY);
 		
 		printSudokuSolution(solver);
     }
