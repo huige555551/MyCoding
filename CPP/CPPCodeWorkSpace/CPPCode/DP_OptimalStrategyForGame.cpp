@@ -28,8 +28,10 @@ int optimalStrategyOfGameDP(int arr[], int size)
 {
 	vector<vector<int>> M(size, vector<int>(size));
 
-	for(int gap=0; gap<size; gap++){
-		for(int i=0; i<size-gap; i++){
+	for(int gap=0; gap<size; gap++)
+	{
+		for(int i=0; i<size-gap; i++)
+		{
 			int j=i+gap;
 
 			int x = 0, y = 0, z = 0;
