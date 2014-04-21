@@ -14,6 +14,15 @@ public class TextFile extends GeneralFile {
 		return super.writeInFile(fileName);		
 	}
 	
+	public void appendISBN(String inputFileName, String isbn) {
+		ArrayList<String> newLines = new ArrayList<>();
+		newLines.add("ISBN: u9348984995898493");
+		for(String s: lines) newLines.add(s);
+		lines = newLines;
+		
+		this.writeInFile(inputFileName);
+	}
+	
 	public ArrayList<String> convert2Xml()
 	{
 		ArrayList<String> newLines = new ArrayList<>();
