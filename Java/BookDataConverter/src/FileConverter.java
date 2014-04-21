@@ -4,39 +4,34 @@ public class FileConverter {
 	private String inputFileName;
 	private String outputFormat;
 	
-	public FileConverter(){}
-	
-	public FileConverter(ConvertInterface converter, String fileName, String format) {
-		setConverter(converter);
-		setInputFileName(fileName);
-		setOutputFormat(format);
+	public FileConverter(String fileName, String format) {
+		this.inputFileName = fileName;
+		this.outputFormat = format;
 	}
 	
 	public void convertFile() {
+		this.converter = getConverter();
 		converter.convert(inputFileName, outputFormat);
 	}
-
+	
 	public ConvertInterface getConverter() {
-		return converter;
-	}
-
-	public void setConverter(ConvertInterface converter) {
-		this.converter = converter;
+		
+		String guessFormat = UtilityClass.guessTextFormat(inputFileName);
+		
+		if(guessFormat.equals("txt") && outputFormat.equals("xml")){
+			return new ConvertText2Xml();
+		}
+		else if(guessFormat.equals("xml") && outputFormat.equals("txt")){
+			return new ConvertXml2Text();
+		}
+		else return null;
 	}
 
 	public String getInputFileName() {
 		return inputFileName;
 	}
 
-	public void setInputFileName(String inputFileName) {
-		this.inputFileName = inputFileName;
-	}
-
 	public String getOutputFormat() {
 		return outputFormat;
 	}
-
-	public void setOutputFormat(String outputFormat) {
-		this.outputFormat = outputFormat;
-	}	
 }
