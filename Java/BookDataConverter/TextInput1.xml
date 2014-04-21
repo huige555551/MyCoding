@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<book xmlns:b="http://example.com/programmin/text/book">
+ <name>Effective Java</name>
+ <authors>
+  <author>Joshua Bloch</author>
+  <author>James gosling</author>
+ </authors>
+ <publishedDate>October 2005</publishedDate>
+</book>
