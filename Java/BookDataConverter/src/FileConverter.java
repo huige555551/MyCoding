@@ -24,6 +24,12 @@ public class FileConverter {
 		else if(guessFormat.equals("xml") && outputFormat.equals("txt")){
 			return new ConvertXml2Text();
 		}
+		else if(guessFormat.equals("txt") && outputFormat.equals("json")){
+			return new ConvertText2Json();
+		}
+		else if(guessFormat.equals("json") && outputFormat.equals("txt")){
+			return new ConvertJson2Text();
+		}
 		else return null;
 	}
 

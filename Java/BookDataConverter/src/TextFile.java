@@ -1,4 +1,11 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 public class TextFile extends GeneralFile {
 	
@@ -47,5 +54,45 @@ public class TextFile extends GeneralFile {
 		newLines.add("</book>");
 		
 		return newLines;
+	}
+	
+	public ArrayList<String> convert2Json() {
+		
+		ArrayList<String> strArray = new ArrayList<String>();
+		strArray.add("{");
+		strArray.add(" \"book\": {");
+		
+		int i = 0;
+		for(String s: lines) {
+			String head = UtilityClass.trim(s.substring(0, s.indexOf(":")));
+			String body = UtilityClass.trim(s.substring(s.indexOf(":")+1));
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("  \"" + head + "\": ");
+					
+			if(head.compareTo("authors")==0) {
+				
+				sb.append("[");
+				
+				String[] items = body.split(",");
+				int j = 0;
+				for(String item: items) {
+					sb.append("\"" + UtilityClass.trim(item) + "\"");
+					if(j!=items.length-1) sb.append(", ");
+					j++;
+				}
+				sb.append("]");
+			} else {
+				sb.append("\"" + body + "\"");				
+			}
+			if(i!=lines.size()-1) sb.append(",");
+			strArray.add(sb.toString());
+			i++;
+		}
+		
+		strArray.add(" }");
+		strArray.add("}");
+				         	
+		return strArray;
 	}
 }

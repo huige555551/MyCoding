@@ -42,7 +42,7 @@ public class XmlFile extends GeneralFile {
 					boolean firstItem = true;
 					for (int i = 0; i < tempNode.getChildNodes().getLength(); i++){
 						String content = tempNode.getChildNodes().item(i).getTextContent().trim();
-						content = content.replace(String.valueOf((char) 160), " ").trim();
+						content = UtilityClass.trim(content);
 			
 						if(!content.isEmpty()){
 							if(firstItem) {
@@ -58,7 +58,7 @@ public class XmlFile extends GeneralFile {
 					}
 				}
 				else {
-					String content = tempNode.getTextContent().replace(String.valueOf((char) 160), " ").trim();
+					String content = UtilityClass.trim(tempNode.getTextContent());
 					//System.out.printf("%s", content);
 					strBuilder.append(content);
 				}

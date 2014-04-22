@@ -28,6 +28,12 @@ public class UtilityClass {
 		return stream;
 	}
 	
+	public static String createString(ArrayList<String> lines) {
+		StringBuilder str = new StringBuilder();
+		for(String s: lines) str.append(s + "\n");
+		return str.toString();
+	}
+	
 	public static String guessTextFormat(String fileName) {
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) { 
