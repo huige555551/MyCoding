@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-bool alluniquechar(char* str)
+bool alluniquechar(const char* str)
 {
 	vector<bool> charset(256, false);
 	
@@ -16,10 +16,11 @@ bool alluniquechar(char* str)
 	return true;
 }
 
-bool alluniquesmall(string str){
+bool alluniquesmall(string str)
+{
 	int check = 0;
 
-	for(int i=0; i<str.length(); i++){
+	for(int i=0; i<(int)str.length(); i++){
 		int letter = str[i]-'a';
 		if(check & (1<<letter)) return false;
 		check = check | (1<<letter);
@@ -28,8 +29,9 @@ bool alluniquesmall(string str){
 	return true;
 }
 
-void main()
+int main()
 {
 	cout << alluniquechar("abcda") << endl;
-	cout << alluniquesmall("abcd") << endl;
+	cout << alluniquesmall("abcda") << endl;
+    return 0;
 }
